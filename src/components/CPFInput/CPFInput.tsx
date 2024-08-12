@@ -11,21 +11,28 @@ interface ICPFInput {
 const CPFInput = ({name, placeholder, value, onChange}: ICPFInput) => {
 
     const handleCpfChange = (e: string) => {
-        let value = e.replace(/\D/g, ''); // Remove tudo que não é dígito
-    
-        if (value.length > 3) {
-          value = value.replace(/^(\d{3})(\d)/, '$1.$2');
-        }
-        if (value.length > 6) {
-          value = value.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
-        }
-        if (value.length > 9) {
-          value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
-        }
-    
-        onChange(value);
-      };
-    
+        //PRIMEIRO VAMOS REMOVER TUDO QUE NAO FOR DIGITO DO INPUT
+        let value = e.replace(/\D/g, "");
+
+        //AGORA VAMOS COLOCAR UM . QUANDO FOR MAIOR QUE 3 DIGITOS
+       if(value.length > 3) {
+        value = value.replace(/^(\d{3})(\d)/, "$1.$2")
+       }
+
+       //AGORA VAMOS COLOCAR O SEGUNDO .
+       if (value.length > 6) {
+        value = value.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+       }
+
+       //AGORA O TERCEIRO ., VAMOS APROVEITAR E COLOCAR O - TAMBÉM
+       if (value.length > 9) {
+        value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4")
+       }
+
+        onChange(value)
+    }
+
+
   return (
     <div className='CPFInput'>
 
@@ -35,10 +42,11 @@ const CPFInput = ({name, placeholder, value, onChange}: ICPFInput) => {
         placeholder={placeholder}
         value={value}
         onChange={(e) => handleCpfChange(e.target.value)}
+        //DEFINIR O MAXIMO DE 14 CARACTERES XXX.XXX.XXX-XX
         maxLength={14}
         />
 
-        <label className='label'>{placeholder}</label>
+        <label className='label' htmlFor={name}>{placeholder}</label>
 
     </div>
   )

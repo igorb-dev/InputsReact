@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import './App.scss';
-import TextInput from './components/TextInput/TextInput';
 import CPFInput from './components/CPFInput/CPFInput';
+import CNPJInput from './components/CNPJInput/CNPJInput';
+
+
 
 function App() {
-  const [cpf, setCPF] = useState<string>("")
+  const [cnpj, setCnpj] = useState<string>("");
 
   return (
     <div className="App">
 
       <h1 className='igorbdev'>{"<IgorB-Dev />"}</h1>
 
-      <CPFInput name='cpf-input' placeholder='CPF' value={cpf} onChange={setCPF}  />
+      <CNPJInput name='cnpj' placeholder='CNPJ' value={cnpj} onChange={setCnpj} />
 
-      <p style={{marginTop: 40}}>CPF: {cpf}</p>
+      <p style={{marginTop: 40}}></p>
       
     </div>
   );
